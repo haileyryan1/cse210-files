@@ -13,7 +13,8 @@ class Program
             Console.WriteLine("2. Display the journal");
             Console.WriteLine("3. Save the journal to a file");
             Console.WriteLine("4. Load the journal from a file");
-            Console.WriteLine("5. Quit");
+            Console.WriteLine("5. Delete an entry");
+            Console.WriteLine("6. Quit");
             Console.Write("Choose an option: ");
 
             string choice = Console.ReadLine();
@@ -43,6 +44,22 @@ class Program
                     break;
 
                 case "5":
+                    if (journal.GetEntries().Count == 0){
+                        Console.WriteLine("No entries to delete");
+                        break;
+                    }
+                    journal.DisplayJournal();
+                    Console.Write("Enter the entry number to delete: ");
+                    if (int.TryParse(Console.ReadLine(), out int entryIndex)){
+                        journal.DeleteEntry(entryIndex - 1);
+                    }
+                    else{
+                        Console.WriteLine("Invalid input. Please enter a valid number.");
+                    }
+                    break;
+
+
+                case "6":
                     Console.WriteLine("Goodbye!");
                     return;
 

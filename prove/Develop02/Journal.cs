@@ -21,4 +21,13 @@ class Journal{
     public void SetEntries(List<Entry> newEntries){
         entries = newEntries;
     }
+    public void DeleteEntry(int index){
+        if (index >=0 && index < entries.Count){
+            entries.RemoveAt(index);
+            Console.WriteLine("Entry deleted successfully.");
+        }
+        else{
+            Console.WriteLine("Invalid entry number.");
+        }
+    }
 }
