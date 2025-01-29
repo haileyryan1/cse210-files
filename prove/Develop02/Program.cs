@@ -1,3 +1,8 @@
+// along with the core requirements I added
+// a menu option that allows the user to delete an entry
+// updates were made in the Program class and Journal class
+
+
 using System;
 
 class Program
