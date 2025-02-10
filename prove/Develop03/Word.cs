@@ -1,20 +1,21 @@
 using System;
 
 class Word{
-    public string Text {get;private set;}
-    private bool isHidden {get;set;}
+    public string _text { get; private set; }
+    private bool _isHidden { get; set; }
 
     public Word(string text){
-        Text = text;
-        isHidden = false;
+        _text = text;
+        _isHidden = false;
     }
     public void Hide(){
-        isHidden = true;
+        _isHidden = true;
     }
     public bool IsHidden(){
-        return isHidden;
+        return _isHidden;
     }
     public string GetRenderedText(){
-        return isHidden ? "____" : Text;
+        return _isHidden ? "____" : _text;
     }
 }
+
