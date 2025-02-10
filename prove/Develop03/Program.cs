@@ -22,18 +22,19 @@ while (true)
         Console.WriteLine("\nPress Enter to hide words or type 'quit' to exit.");
 
         string _userInput = Console.ReadLine()?.Trim().ToLower();
-        if (_userInput == "quit"){
+        if (_userInput == "quit")
+        {
             return;
         }
         _scripture.HideWords();
     }
-Console.Clear();
-Console.WriteLine("You've hidden all the words in this scripture");
-Console.WriteLine("\nPress Enter for a new scripture or type 'quit' to exit.");
+    Console.Clear();
+    Console.WriteLine("You've hidden all the words in this scripture");
+    Console.WriteLine("\nPress Enter for a new scripture or type 'quit' to exit.");
 
-string _userInput2 = Console.ReadLine()?.Trim().ToLower();
-if (_userInput2 == "quit")
-{
-    return;
-}
+    string _userInput2 = Console.ReadLine()?.Trim().ToLower();
+    if (_userInput2 == "quit")
+    {
+        return;
+    }
 }
