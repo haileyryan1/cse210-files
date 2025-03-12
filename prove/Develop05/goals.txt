@@ -1,2 +1,2 @@
 950
-ChecklistGoal,run,100,False,2,5,50
+ChecklistGoal,run,100,False,0,5,50

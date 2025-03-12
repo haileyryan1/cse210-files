@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+// I added a function in GoalManager where the user can delete a goal
+// The menu reflects this action
 class Program
 {
     static void Main()
