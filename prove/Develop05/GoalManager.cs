@@ -9,49 +9,68 @@ class GoalManager
         _totalScore = 0;
     }
 
-    public void addGoal(Goal goal)
+    public void AddGoal(Goal goal)
     {
         _goals.Add(goal);
     }
     
-    public void recordGoalEvent(string goalName)
+    public void RecordGoalEvent(string goalName)
     {
         foreach (var goal in _goals)
         {
-            if (goal.GetName() == goalName)
+            if (goal.GetName().Equals(goalName, StringComparison.OrdinalIgnoreCase))
             {
-                goal.recordEvent();
-                _totalScore += goal.GetPoints();
+                _totalScore += goal.RecordEvent();
                 return;
             }
         }
-        Console.WriteLine($"Goal {goalName} not found.");
+        Console.WriteLine($"Goal '{goalName}' not found.");
     }
     
-    public void displayGoals()
+    public void DisplayGoals()
     {
-        Console.WriteLine("\nCurrent Goals: ");
+        Console.WriteLine("\nCurrent Goals:");
         foreach (var goal in _goals)
         {
-            goal.displayStatus();
+            goal.DisplayStatus();
         }
-        Console.WriteLine($"Total Score: {_totalScore}");
+        Console.WriteLine($"Total Score: {_totalScore}\n");
     }
     
-    public void saveProgress(string filename)
+    public void DeleteGoal(string goalName)
+    {
+        Goal goalToRemove = _goals.Find(g => g.GetName().Equals(goalName, StringComparison.OrdinalIgnoreCase));
+        if (goalToRemove != null)
+        {
+            _goals.Remove(goalToRemove);
+            Console.WriteLine($"Goal '{goalName}' has been deleted.");
+        }
+        else
+        {
+            Console.WriteLine($"Goal '{goalName}' not found.");
+        }
+    }
+
+    public void SaveProgress(string filename)
     {
         using (StreamWriter writer = new StreamWriter(filename))
         {
             writer.WriteLine(_totalScore);
             foreach (var goal in _goals)
             {
-                writer.WriteLine($"{goal.GetType().Name},{goal.GetName()},{goal.GetPoints()},{goal.IsCompleted()}");
+                if (goal is ChecklistGoal checklistGoal)
+                {
+                    writer.WriteLine($"{goal.GetType().Name},{goal.GetName()},{goal.GetPoints()},{goal.IsCompleted()},{checklistGoal.GetCurrentCount()},{checklistGoal.GetTargetCount()},{checklistGoal.GetBonusPoints()}");
+                }
+                else
+                {
+                    writer.WriteLine($"{goal.GetType().Name},{goal.GetName()},{goal.GetPoints()},{goal.IsCompleted()}");
+                }
             }
         }
-        Console.WriteLine("Progress saved.");
     }
 
-    public void loadProgress(string filename)
+    public void LoadProgress(string filename)
     {
         if (!File.Exists(filename))
         {
@@ -76,13 +95,13 @@ class GoalManager
                 {
                     "SimpleGoal" => new SimpleGoal(name, "Loaded Goal", points),
                     "EternalGoal" => new EternalGoal(name, "Loaded Goal", points),
-                    "ChecklistGoal" => new ChecklistGoal(name, "Loaded Goal", points, 5, 10),
+                    "ChecklistGoal" => new ChecklistGoal(name, "Loaded Goal", points, 5, 50),
                     _ => null
                 };
 
                 if (goal != null)
                 {
-                    if (isCompleted) goal.recordEvent();
+                    if (isCompleted) goal.RecordEvent();
                     _goals.Add(goal);
                 }
             }

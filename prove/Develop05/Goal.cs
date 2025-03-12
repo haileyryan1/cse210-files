@@ -13,11 +13,11 @@ abstract class Goal
         _isCompleted = false;
     }
 
-    public abstract void recordEvent();
-
-    public abstract void displayStatus();
-
+    public abstract int RecordEvent();
+    public abstract void DisplayStatus();
+    
     public string GetName() => _name;
+    public string GetDescription => _description;
     public int GetPoints() => _points;
     public bool IsCompleted() => _isCompleted;
 }

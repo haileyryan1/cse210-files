@@ -1,4 +1,2 @@
-50
-SimpleGoal,Run a Marathon,100,False
-EternalGoal,Daily Exercise,10,False
-ChecklistGoal,Read Books,20,False
+950
+ChecklistGoal,run,100,False,2,5,50
